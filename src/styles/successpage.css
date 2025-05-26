@@ -1,0 +1,156 @@
+/* src/styles/successpage.css */
+
+/* Gaya untuk kontainer utama halaman Sukses */
+/* Ini akan menjadi kontainer flex vertikal yang memusatkan konten */
+.success-page-container {
+  display: flex; /* Menggunakan Flexbox */
+  flex-direction: column; /* Menyusun item secara vertikal */
+  align-items: center; /* Pusatkan item secara horizontal */
+  justify-content: center; /* Pusatkan item secara vertikal */
+  min-height: 100vh; /* Mengambil tinggi viewport penuh */
+  padding: var(--spacing-unit); /* Menambahkan padding di sekitar konten */
+  /* Menghapus background-color di sini agar transparan atau mengikuti body */
+  /* background-color: var(--color-background); */
+  color: var(--color-text-primary); /* Menggunakan warna teks utama dari tema */
+  text-align: center; /* Pusatkan teks di dalam kontainer */
+  width: 100%; /* Ambil lebar penuh */
+  box-sizing: border-box; /* Pastikan padding tidak menambah lebar total */
+  /* Menghapus gaya card (border, border-radius, box-shadow) dari sini */
+}
+
+/* Gaya untuk kontainer ikon status */
+.status-icon-container {
+  margin-bottom: calc(var(--spacing-unit) * 1.5); /* Jarak di bawah ikon */
+  font-size: 3em; /* Ukuran ikon */
+  /* Menghapus gap dari parent, gunakan margin di sini */
+}
+
+/* Gaya untuk ikon status sukses (contoh: centang) */
+.status-icon.success {
+  color: var(--color-success); /* Warna hijau untuk sukses */
+}
+
+/* Gaya untuk ikon status error (contoh: silang) */
+.status-icon.error {
+  color: var(--color-danger); /* Warna merah untuk error */
+}
+
+/* Gaya untuk judul halaman Sukses */
+.success-page-container h2 {
+  color: var(--color-primary); /* Menggunakan warna primer dari tema */
+  margin: 0 0 var(--spacing-unit) 0; /* Atur margin: atas 0, kanan 0, bawah var(--spacing-unit), kiri 0 */
+  font-size: 1.8em; /* Ukuran font judul */
+  font-weight: 700; /* Ketebalan font */
+  /* Menghapus gaya dari card, atur margin langsung */
+}
+
+/* Gaya untuk paragraf pesan di halaman Sukses */
+.success-page-container p {
+  margin: 0 0 var(--spacing-unit) 0; /* Atur margin: atas 0, kanan 0, bawah var(--spacing-unit), kiri 0 */
+  font-size: 1em; /* Ukuran font paragraf */
+  line-height: 1.6; /* Tinggi baris untuk keterbacaan */
+  color: var(--color-text-secondary); /* Warna teks sekunder */
+  max-width: 600px; /* Batasi lebar paragraf */
+  width: 100%; /* Ambil lebar penuh hingga max-width */
+  box-sizing: border-box; /* Pastikan padding tidak menambah lebar */
+  padding: 0 var(--spacing-unit); /* Tambahkan padding horizontal agar tidak menempel di tepi layar kecil */
+  /* Menghapus gaya dari card, atur margin dan padding langsung */
+}
+
+/* Gaya khusus untuk pesan error di halaman Sukses */
+.success-page-container .error-message {
+  color: var(--color-danger); /* Menggunakan warna bahaya dari tema */
+  font-size: 0.9em; /* Ukuran font lebih kecil untuk pesan error */
+  font-style: italic; /* Teks miring */
+  margin: 0 0 var(--spacing-unit) 0; /* Atur margin: atas 0, kanan 0, bawah var(--spacing-unit), kiri 0 */
+  padding: 0 var(--spacing-unit); /* Tambahkan padding horizontal */
+  /* Menghapus gaya dari card, atur margin dan padding langsung */
+}
+
+/* Gaya untuk tombol Kembali ke Dashboard */
+.success-page-container button {
+  /* Menggunakan gaya dasar dari index.css atau global.css jika ada */
+  /* Jika tidak, tambahkan gaya dasar di sini: */
+  padding: var(--spacing-unit) calc(var(--spacing-unit) * 2); /* Padding tombol */
+  font-size: 1em; /* Ukuran font tombol */
+  cursor: pointer; /* Mengubah kursor menjadi pointer saat diarahkan */
+  background-color: var(
+    --color-primary
+  ); /* Menggunakan warna primer dari tema */
+  color: white; /* Warna teks putih */
+  border: none; /* Menghapus border default tombol */
+  border-radius: var(--border-radius); /* Menggunakan radius sudut dari tema */
+  transition: background-color 0.2s ease, box-shadow 0.2s ease,
+    opacity 0.2s ease; /* Transisi halus */
+  font-weight: 500; /* Ketebalan font */
+  display: inline-flex; /* Menggunakan flexbox untuk menyusun ikon dan teks */
+  align-items: center; /* Pusatkan ikon dan teks vertikal */
+  gap: calc(var(--spacing-unit) * 4); /* Jarak antara ikon dan teks */
+  margin-top: var(
+    --spacing-unit
+  ); /* Tambahkan margin atas untuk jarak dari elemen sebelumnya */
+}
+
+/* Efek hover pada tombol */
+.success-page-container button:hover {
+  background-color: var(
+    --color-primary-dark
+  ); /* Warna primer gelap saat hover */
+  box-shadow: var(--shadow-elevation-1); /* Menambahkan bayangan halus */
+}
+
+/* Efek focus pada tombol (untuk aksesibilitas) */
+.success-page-container button:focus {
+  outline: 2px solid var(--color-primary-dark); /* Outline saat focus */
+  outline-offset: 2px; /* Jarak outline dari tombol */
+}
+
+/* Gaya untuk tombol saat dinonaktifkan */
+.success-page-container button:disabled {
+  background-color: var(--color-surface-dark); /* Warna gelap saat disabled */
+  color: var(--color-text-tertiary); /* Warna teks pudar */
+  cursor: not-allowed; /* Mengubah kursor menjadi "tidak diizinkan" */
+  box-shadow: none; /* Menghapus bayangan */
+  opacity: 0.7; /* Sedikit transparan */
+}
+
+/* Media Query untuk responsif di layar kecil */
+@media (max-width: 600px) {
+  .success-page-container {
+    padding: var(--spacing-unit-small); /* Kurangi padding di layar kecil */
+  }
+
+  .status-icon-container {
+    font-size: 2.5em; /* Kurangi ukuran ikon di layar kecil */
+    margin-bottom: var(--spacing-unit); /* Kurangi jarak di bawah ikon */
+  }
+
+  .success-page-container h2 {
+    font-size: 1.5em; /* Kurangi ukuran judul */
+    margin-bottom: var(--spacing-unit-small); /* Kurangi margin bawah judul */
+  }
+
+  .success-page-container p {
+    font-size: 0.95em; /* Sedikit kurangi ukuran paragraf */
+    margin-bottom: var(
+      --spacing-unit-small
+    ); /* Kurangi margin bawah paragraf */
+    padding: 0 var(--spacing-unit-small); /* Kurangi padding horizontal paragraf */
+  }
+
+  .success-page-container .error-message {
+    margin-bottom: var(
+      --spacing-unit-small
+    ); /* Kurangi margin bawah pesan error */
+    padding: 0 var(--spacing-unit-small); /* Kurangi padding horizontal pesan error */
+  }
+
+  .success-page-container button {
+    padding: var(--spacing-unit-small) var(--spacing-unit); /* Kurangi padding tombol */
+    font-size: 0.9em; /* Kurangi ukuran font tombol */
+    gap: var(
+      --spacing-unit-small
+    ); /* Pastikan gap ikon/teks tetap proporsional */
+    margin-top: var(--spacing-unit-small); /* Kurangi margin atas tombol */
+  }
+}

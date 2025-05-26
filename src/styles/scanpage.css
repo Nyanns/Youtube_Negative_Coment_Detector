@@ -1,0 +1,521 @@
+/* src/styles/scanpage.css */
+
+/* Gaya dasar untuk kontainer halaman Scan Komentar */
+.scan-page {
+  padding: var(--spacing-unit) 0; /* Mengurangi padding horizontal menjadi 0 */
+  max-width: 900px; /* Batasi lebar maksimum konten scan */
+  margin: 0 auto; /* Pusatkan konten */
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 2); /* Jarak antar bagian utama */
+}
+
+/* Gaya untuk tombol Kembali */
+.back-button {
+  align-self: flex-start; /* Ratakan ke kiri */
+  margin-left: var(
+    --spacing-unit
+  ); /* Tambahkan margin kiri agar tidak menempel ke tepi */
+  /* Gaya dasar diwarisi dari index.css */
+}
+
+/* Gaya untuk informasi video yang dipilih */
+.video-info-scan {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-unit); /* Jarak antara thumbnail dan detail */
+  padding: var(--spacing-unit);
+  background-color: var(--color-surface); /* Warna latar belakang permukaan */
+  border: 1px solid var(--color-border); /* Border tipis */
+  border-radius: var(--border-radius); /* Sudut membulat */
+  box-shadow: var(--shadow-elevation-1); /* Bayangan halus */
+  margin: 0 var(--spacing-unit); /* Tambahkan margin horizontal agar tidak menempel ke tepi */
+}
+
+/* Gaya untuk thumbnail video di halaman scan */
+.video-thumbnail-scan {
+  width: 120px;
+  height: auto; /* Pertahankan rasio aspek */
+  border-radius: var(--border-radius-small); /* Sudut membulat kecil */
+  object-fit: cover; /* Pastikan gambar menutupi area */
+  flex-shrink: 0; /* Jangan biarkan gambar menyusut */
+}
+
+/* Gaya untuk detail video di halaman scan */
+.video-details-scan {
+  flex-grow: 1; /* Biarkan detail mengisi ruang yang tersedia */
+  min-width: 0; /* Izinkan elemen menyusut */
+}
+
+/* Gaya untuk judul video di halaman scan */
+.video-details-scan h2 {
+  margin: 0;
+  font-size: 1.8em; /* Ukuran font lebih besar */
+  font-weight: 700; /* Tebal */
+  color: var(--color-primary); /* Warna primer */
+  word-break: break-word; /* Mencegah teks melebihi kontainer */
+}
+
+/* Gaya untuk kontainer kontrol deteksi dan tampilan */
+.scan-controls {
+  display: flex;
+  gap: var(--spacing-unit); /* Jarak antar elemen kontrol */
+  align-items: center;
+  flex-wrap: wrap; /* Biarkan item wrap ke baris baru */
+  margin: 0 var(--spacing-unit); /* Tambahkan margin horizontal agar tidak menempel ke tepi */
+}
+
+/* Gaya untuk kontainer tombol deteksi/tampilan */
+.scan-detection-buttons {
+  display: flex; /* Gunakan flexbox */
+  gap: var(--spacing-unit); /* Jarak antar tombol */
+  align-items: center; /* Pusatkan vertikal */
+  flex-wrap: wrap; /* Biarkan tombol wrap ke baris baru */
+}
+
+/* Gaya untuk tombol deteksi (Judol/Spam/Toxic) */
+.detection-button {
+  /* Gaya dasar diwarisi dari index.css */
+  background-color: var(
+    --color-danger
+  ); /* Warna latar belakang bahaya (merah) */
+  color: white; /* Warna teks putih */
+}
+
+/* Gaya hover untuk tombol deteksi */
+.detection-button:hover {
+  background-color: var(--color-danger-dark); /* Warna merah gelap saat hover */
+  color: white; /* Teks tetap putih saat hover */
+}
+
+/* Gaya untuk tombol deteksi saat aktif */
+.detection-button.active {
+  background-color: var(
+    --color-danger-dark
+  ); /* Warna sedikit lebih gelap saat aktif */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2); /* Efek inset shadow */
+  color: white; /* Teks tetap putih saat aktif */
+}
+
+/* Gaya untuk tombol Tampilkan Gabungan dan Tampilkan Semua (Outline Style) */
+.outline-button {
+  background-color: transparent; /* Background transparan */
+  border: 1px solid var(--color-primary); /* Border warna primer */
+  color: var(--color-primary); /* Warna teks primer */
+  padding: calc(var(--spacing-unit) * 0.75 - 1px)
+    calc(var(--spacing-unit) * 1.5 - 1px); /* Sesuaikan padding karena ada border */
+  border-radius: var(--border-radius-small); /* Radius sudut */
+  font-weight: 500;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.25s ease, box-shadow 0.25s ease,
+    color 0.25s ease, border-color 0.25s ease;
+}
+
+.outline-button:hover {
+  background-color: rgba(
+    var(--color-primary-rgb),
+    0.1
+  ); /* Background transparan dengan overlay warna primer */
+  color: var(--color-primary-dark); /* Warna teks primer gelap */
+  border-color: var(--color-primary-dark); /* Warna border primer gelap */
+  box-shadow: var(--shadow-elevation-1);
+}
+
+.outline-button:disabled {
+  background-color: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Gaya untuk garis pemisah sebelum daftar komentar */
+.comments-separator {
+  height: 1px;
+  background-color: var(--color-border);
+  margin: var(--spacing-unit) 0;
+}
+
+/* --- Gaya untuk Kontainer Loading dan Error Halaman Scan (Pusat Layar Penuh) --- */
+.scan-page-loading,
+.scan-page-error {
+  position: fixed; /* Posisikan relatif terhadap viewport */
+  top: 0;
+  left: 0;
+  width: 100%; /* Lebar penuh viewport */
+  height: 100%; /* Tinggi penuh viewport */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Memusatkan item secara horizontal */
+  justify-content: center; /* Memusatkan item secara vertikal */
+  padding: var(--spacing-unit); /* Padding dari tepi viewport */
+  text-align: center;
+  background-color: var(
+    --color-background-transparent,
+    rgba(var(--color-background-rgb), 0.95)
+  ); /* Latar belakang semi-transparan agar konten di belakangnya sedikit terlihat */
+  z-index: 100; /* Pastikan di atas konten lain di halaman ScanPage */
+  /* Hapus margin karena sudah fixed dan full screen */
+  margin: 0;
+}
+
+.scan-page-loading .loading-spinner {
+  margin-bottom: 15px; /* Jarak antara spinner dan teks di bawahnya */
+}
+
+.scan-page-error p {
+  color: var(--color-danger, #d9534f); /* Warna teks untuk pesan error */
+  margin-bottom: 15px; /* Jarak ke tombol jika ada */
+  font-weight: 500;
+}
+
+.scan-page-error .back-button {
+  margin-top: 10px; /* Jarak dari pesan error ke tombol kembali */
+  /* align-self: center; Tidak perlu lagi karena parent sudah flex center */
+  /* margin-left: 0; Tidak perlu lagi */
+}
+/* --- Akhir Gaya Kontainer Loading dan Error --- */
+
+/* Gaya untuk kontainer daftar komentar - Kotak Scrollable */
+.comments-list-container {
+  background-color: var(--color-surface); /* Warna latar belakang permukaan */
+  border: 1px solid var(--color-border); /* Border tipis */
+  border-radius: var(--border-radius); /* Sudut membulat */
+  box-shadow: var(--shadow-elevation-1); /* Bayangan halus */
+  padding: var(--spacing-unit);
+  overflow-y: auto; /* Aktifkan scrolling vertikal */
+  max-height: 400px; /* Tinggi maksimum sebelum scroll */
+  display: flex;
+  flex-direction: column;
+  min-height: 100px; /* Tinggi minimum */
+  margin: 0 var(--spacing-unit); /* Tambahkan margin horizontal agar tidak menempel ke tepi */
+}
+
+/* Gaya untuk daftar komentar (ul) */
+.comments-list {
+  list-style: none; /* Hapus bullet point */
+  padding: 0;
+  margin: 0;
+  flex-grow: 1; /* Biarkan daftar mengisi ruang yang tersedia */
+}
+
+/* Gaya untuk setiap item komentar (li) */
+.comment-item {
+  display: flex;
+  align-items: center; /* Pusatkan item secara vertikal */
+  gap: var(--spacing-unit); /* Jarak antara checkbox dan konten */
+  padding: var(--spacing-unit);
+  border: 1px solid var(--color-border); /* Border tipis */
+  border-radius: var(--border-radius-small); /* Sudut membulat kecil */
+  margin-bottom: var(--spacing-unit); /* Jarak antar item */
+  background-color: var(--color-background); /* Warna latar belakang default */
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease; /* Transisi halus */
+}
+
+/* Hapus border bawah pada item terakhir */
+.comment-item:last-child {
+  margin-bottom: 0; /* Hapus margin bawah pada item terakhir */
+}
+
+/* Efek hover pada item komentar */
+.comment-item:hover {
+  background-color: var(--color-hover-overlay); /* Warna overlay saat hover */
+  box-shadow: var(--shadow-elevation-1); /* Bayangan saat hover */
+}
+
+/* --- Gaya untuk komentar yang ditandai oleh deteksi --- */
+
+/* Gaya untuk komentar yang ditandai sebagai Judol/Spam (Prioritas tertinggi - Merah Kuat) */
+.comment-item.is-judol-spam {
+  border-color: var(--color-danger-dark); /* Merah gelap */
+  background-color: #ffcdd2; /* Merah muda */
+  box-shadow: 0 0 5px rgba(var(--color-danger-rgb), 0.5); /* Bayangan merah */
+}
+
+/* Gaya untuk komentar yang ditandai sebagai Toxic (Prioritas kedua - Oranye) */
+/* Gaya ini akan menimpa gaya is-flagged jika kedua kelas ada */
+.comment-item.is-toxic {
+  border-color: #fb8c00; /* Oranye kuat */
+  background-color: #ffe0b2; /* Oranye muda */
+  box-shadow: 0 0 5px rgba(251, 140, 0, 0.5); /* Bayangan oranye */
+}
+
+/* Gaya untuk komentar yang ditandai oleh metode deteksi apapun (selain Judol/Spam atau Toxic - Merah Primer) */
+/* Ini akan menjadi gaya default untuk komentar yang "bermasalah" tapi tidak spam/toxic berat */
+.comment-item.is-flagged {
+  border-color: var(--color-primary); /* Warna merah primer */
+  background-color: #ffe0e0; /* Merah muda sangat pucat */
+  box-shadow: 0 0 5px rgba(var(--color-primary-rgb), 0.5); /* Bayangan merah primer */
+}
+
+/* Gaya untuk checkbox komentar */
+.comment-checkbox {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0; /* Jangan menyusut */
+  flex-grow: 0; /* Jangan membesar */
+  margin-top: 0; /* Tetap 0 karena align-items: center di parent */
+  cursor: pointer;
+  accent-color: var(--color-primary); /* Warna checkbox */
+}
+
+/* Gaya untuk konten komentar (teks, author, meta) */
+.comment-content {
+  flex-grow: 1; /* Biarkan konten mengisi ruang */
+  min-width: 0; /* Izinkan menyusut */
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--spacing-unit) * 0.5); /* Jarak antar elemen dalam konten */
+}
+
+/* Gaya untuk nama penulis komentar */
+.comment-author {
+  font-weight: 600;
+  color: var(--color-text-primary); /* Warna teks primer */
+  font-size: 1em;
+}
+
+/* Gaya untuk teks komentar */
+.comment-text {
+  color: var(--color-text-secondary); /* Warna teks sekunder */
+  word-break: break-word; /* Mencegah teks melebihi kontainer */
+  font-size: 0.95em;
+  white-space: pre-wrap; /* Mempertahankan spasi dan baris baru dalam teks komentar */
+}
+
+/* Gaya untuk metadata komentar (label deteksi) */
+.comment-meta {
+  font-size: 0.8em;
+  color: var(--color-text-tertiary); /* Warna teks tersier */
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-unit); /* Jarak antar label */
+  flex-wrap: wrap; /* Biarkan label wrap */
+  margin-top: calc(var(--spacing-unit) * 0.5); /* Ruang di atas label deteksi */
+}
+
+/* Gaya untuk label deteksi (Judol/Spam, Toxic, Flagged, Debug) */
+.detection-label {
+  font-size: 0.7em;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: var(--border-radius-small); /* Sudut membulat kecil */
+  color: white; /* Warna teks default putih */
+  display: inline-block;
+  white-space: nowrap; /* Mencegah label terpotong */
+}
+
+.detection-label.judol-spam {
+  background-color: var(--color-danger-dark); /* Merah gelap */
+  color: white; /* Teks putih */
+}
+
+.detection-label.toxic {
+  background-color: #fb8c00; /* Oranye kuat */
+  color: white; /* Teks putih */
+}
+
+.detection-label.flagged {
+  background-color: var(--color-primary); /* Warna merah primer */
+  color: white; /* Teks putih */
+}
+
+/* Gaya untuk label skor debug (hanya di mode DEV) */
+.detection-label.debug-scores {
+  background-color: var(--color-surface-dark); /* Warna latar belakang gelap */
+  color: var(--color-text-tertiary); /* Warna teks tersier */
+  font-size: 0.6em; /* Ukuran font lebih kecil */
+  font-weight: normal; /* Tidak tebal */
+  padding: 1px 4px;
+}
+
+/* Gaya untuk area kontrol bawah (Centang Semua & Hapus) */
+.bottom-controls {
+  display: flex;
+  justify-content: flex-start; /* Ratakan item ke kiri */
+  gap: var(--spacing-unit); /* Jarak antar tombol */
+  align-items: center;
+  flex-wrap: wrap; /* Biarkan item wrap */
+  margin-top: var(--spacing-unit);
+  padding: 0;
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0 var(--spacing-unit); /* Tambahkan margin horizontal agar tidak menempel ke tepi */
+}
+
+/* Gaya untuk tombol Centang Semua / Batalkan Centang */
+/* Menggunakan gaya outline-button */
+.select-all-button.check-all-button {
+  margin-top: 0;
+  align-self: auto;
+  /* Terapkan gaya outline */
+  background-color: transparent;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  padding: calc(var(--spacing-unit) * 0.75 - 1px)
+    calc(var(--spacing-unit) * 1.5 - 1px);
+}
+
+.select-all-button.check-all-button:hover {
+  box-shadow: var(--shadow-elevation-1);
+  /* Terapkan gaya hover outline */
+  background-color: rgba(var(--color-primary-rgb), 0.1);
+  color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+
+/* Gaya untuk tombol Hapus */
+.delete-button {
+  background-color: var(--color-danger); /* Warna latar belakang bahaya */
+  color: white; /* Warna teks putih */
+}
+.delete-button:hover {
+  background-color: var(
+    --color-danger-dark
+  ); /* Warna bahaya gelap saat hover */
+  color: white; /* Teks tetap putih saat hover */
+}
+
+/* Gaya untuk pesan error delete */
+.delete-error-message {
+  color: var(--color-danger); /* Warna teks bahaya */
+  font-size: 0.9em;
+  margin-left: var(--spacing-unit);
+  flex-basis: 100%; /* Ambil lebar penuh di layar kecil jika wrap */
+  text-align: left;
+}
+
+/* Gaya untuk pesan loading, error, dan tidak ada komentar di dalam .comments-list-container */
+.comments-list-container .loading-message,
+.comments-list-container .error-message, /* Lebih spesifik untuk yang di dalam list container */
+.comments-list-container .no-comments-message {
+  text-align: center;
+  padding: var(--spacing-unit) 0;
+  color: var(--color-text-secondary); /* Warna teks sekunder */
+  font-style: italic;
+  flex-grow: 1; /* Agar mengisi ruang jika .comments-list-container kosong */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comments-list-container .error-message {
+  /* Lebih spesifik untuk yang di dalam list container */
+  color: var(--color-danger); /* Warna teks bahaya untuk error */
+  font-weight: 600;
+}
+
+/* --- Media Query untuk Responsif --- */
+@media (max-width: 768px) {
+  .scan-page {
+    padding: var(--spacing-unit-small) 0; /* Kurangi padding horizontal di layar kecil */
+    gap: var(--spacing-unit);
+  }
+
+  .back-button,
+  .video-info-scan,
+  .scan-controls,
+  .comments-list-container,
+  .bottom-controls {
+    /* Hapus .scan-page-loading & .scan-page-error dari sini karena sudah fixed */
+    margin: 0 var(--spacing-unit-small); /* Kurangi margin horizontal di layar kecil */
+  }
+
+  .video-info-scan {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .video-thumbnail-scan {
+    width: 100%;
+    height: auto;
+    margin-right: 0;
+    margin-bottom: var(--spacing-unit);
+  }
+
+  .video-details-scan h2 {
+    font-size: 1.5em; /* Sesuaikan ukuran judul di layar kecil */
+  }
+
+  .scan-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .scan-detection-buttons {
+    /* Tata tombol deteksi/tampilan dalam kolom di layar kecil */
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-unit); /* Jarak antar tombol */
+  }
+
+  .detection-button,
+  .outline-button {
+    /* Pastikan tombol deteksi dan outline ambil lebar penuh */
+    width: 100%;
+    text-align: center; /* Pusatkan teks tombol */
+  }
+
+  .comments-list-container {
+    /* .scan-page-loading & .scan-page-error tidak perlu max-height/min-height di sini lagi */
+    max-height: 300px; /* Sesuaikan tinggi maksimum untuk scroll di layar kecil */
+    min-height: 150px; /* Sesuaikan tinggi minimum di layar kecil */
+  }
+  /* .scan-page-loading, .scan-page-error tidak perlu min-height di media query karena sudah height: 100% */
+
+  .comment-item {
+    flex-direction: column; /* Tata checkbox dan konten komentar secara vertikal */
+    align-items: stretch; /* Rentangkan item secara horizontal */
+    gap: calc(
+      var(--spacing-unit) * 0.5
+    ); /* Tambahkan gap vertikal antar elemen */
+    padding: var(--spacing-unit-small);
+  }
+
+  .comment-checkbox {
+    margin-top: 0;
+    align-self: flex-start; /* Ratakan checkbox ke kiri di mode kolom */
+  }
+
+  .comment-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: calc(
+      var(--spacing-unit) * 0.5
+    ); /* Tambahkan gap vertikal antar label */
+  }
+
+  /* Gaya Responsif untuk Kontrol Bawah */
+  .bottom-controls {
+    flex-direction: row; /* Coba tata dalam baris */
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0;
+    gap: var(--spacing-unit); /* Jarak antar tombol */
+  }
+
+  .select-all-button.check-all-button,
+  .delete-button {
+    width: auto; /* Biarkan lebar otomatis sesuai konten jika muat */
+    margin-top: 0;
+    margin-left: 0;
+    flex-basis: auto; /* Default */
+  }
+
+  /* Jika tombol wrap, pastikan mereka mengambil lebar penuh */
+  .bottom-controls.flex-wrap .select-all-button.check-all-button,
+  .bottom-controls.flex-wrap .delete-button {
+    width: 100%;
+  }
+
+  .delete-error-message {
+    margin-left: 0;
+    margin-top: var(--spacing-unit);
+    text-align: left;
+    width: 100%;
+  }
+}

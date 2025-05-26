@@ -1,0 +1,99 @@
+/* src/styles/colors.css */
+
+/* Definisikan HANYA variabel warna di selector :root */
+:root {
+  /* --- Colors (Matching the Dashboard Red/Maroon Theme) --- */
+  --color-primary: #b00020; /* Main branding/action color (Maroon) */
+  --color-primary-dark: #880015; /* Darker shade for hover/active */
+
+  --color-danger: #d93025; /* Standard red for errors, warnings, suspicious */
+  --color-danger-rgb: 217, 48, 37; /* RGB version for penggunaan rgba() */
+  --color-danger-dark: #a52a2a; /* --- Darker shade for danger hover (Light Mode) --- */
+
+  --color-success: #1e8e3e; /* Standard green for success/positive */
+
+  --color-background: #f9f9f9; /* General page background (Light Mode) */
+  --color-surface: #ffffff; /* Background for cards, panels, lists (Light Mode) */
+
+  --color-text-primary: #333; /* Main text color (abu tua) (Light Mode) */
+  --color-text-secondary: #666; /* Warna teks sekunder (abu sedang) (Light Mode) */
+  --color-text-on-primary: #ffffff; /* Warna teks di atas latar primer (putih) */
+  --color-text-on-danger: #ffffff; /* Warna teks di atas latar danger (putih) */
+  --color-text-on-success: #ffffff; /* Warna teks di atas latar success (putih) */
+
+  --color-border: #ddd; /* Warna border atau pemisah (abu muda) (Light Mode) */
+
+  --color-hover-overlay: rgba(
+    0,
+    0,
+    0,
+    0.04
+  ); /* Efek overlay saat hover (abu transparan) */
+
+  /* Variabel RGB yang digunakan di rgba() */
+  --color-primary-rgb: 176, 0, 32; /* RGB yang benar untuk #b00020 */
+  --color-text-primary-rgb: 51, 51, 51; /* RGB dari #333 */
+}
+
+/* --- Dark Mode Colors --- */
+/* Gunakan selector .dark-mode pada root element (misal: body) */
+:root.dark-mode {
+  --color-primary: #ff6b6b; /* Primary color in dark mode (lighter red/maroon) */
+  --color-primary-dark: #e53e3e; /* Darker shade for hover/active in dark mode */
+
+  --color-danger: #fc8181; /* Danger color in dark mode */
+  --color-danger-rgb: 252, 129, 129; /* RGB for dark mode danger */
+  --color-danger-dark: #c53030; /* --- Darker shade for danger hover (Dark Mode) --- */
+
+  --color-success: #68d391; /* Success color in dark mode */
+
+  --color-background: #1a202c; /* General page background (Dark Mode) */
+  --color-surface: #2d3748; /* Background for cards, panels, lists (Dark Mode) */
+
+  --color-text-primary: #e2e8f0; /* Main text color (putih keabu-abuan) (Dark Mode) */
+  --color-text-secondary: #a0aec0; /* Secondary text color (abu-abu terang) (Dark Mode) */
+  --color-text-on-primary: #1a202c; /* Text on primary in dark mode (darker) */
+  --color-text-on-danger: #1a202c; /* Text on danger in dark mode */
+  --color-text-on-success: #1a202c; /* Text on success in dark mode */
+
+  --color-border: #4a5568; /* Border color (Dark Mode) */
+
+  --color-hover-overlay: rgba(
+    255,
+    255,
+    255,
+    0.08
+  ); /* Hover overlay in dark mode (white transparan) */
+
+  /* Variabel RGB yang digunakan di rgba() dalam dark mode */
+  --color-primary-rgb: 255, 107, 107; /* RGB for dark mode primary */
+  --color-text-primary-rgb: 226, 232, 240; /* RGB for dark mode text primary */
+}
+
+/* Tambahkan transisi halus untuk perubahan warna saat mode berubah */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Terapkan transisi ke elemen yang menggunakan variabel warna */
+/* Ini bisa jadi banyak, alternatifnya adalah menerapkan transisi pada properti spesifik
+   di setiap elemen yang menggunakan variabel warna, atau menggunakan library CSS-in-JS
+   yang mendukung tema dengan lebih baik. Untuk contoh ini, kita tambahkan beberapa transisi umum. */
+.dashboard-page,
+.dashboard-header,
+.user-profile,
+.profile-name,
+.logout-button,
+.dashboard-content h1,
+.no-videos-message,
+.video-list-container,
+.video-item,
+.video-card,
+.video-info,
+.video-thumbnail,
+.video-details,
+.video-title,
+.select-video-button {
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease, box-shadow 0.3s ease;
+}

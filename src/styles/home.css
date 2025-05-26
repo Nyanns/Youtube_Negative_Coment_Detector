@@ -1,0 +1,150 @@
+/* src/styles/home.css */
+
+/* Container utama halaman Home */
+.home-page {
+  display: flex; /* Menggunakan Flexbox untuk tata letak */
+  flex-direction: column; /* Elemen disusun secara vertikal */
+  align-items: center; /* Pusatkan elemen secara horizontal */
+  justify-content: center; /* Pusatkan elemen secara vertikal */
+  min-height: 100vh; /* Tinggi minimal 100% dari viewport height */
+  padding: 20px; /* Padding di sekeliling konten */
+  text-align: center; /* Teks rata tengah */
+  /* Latar belakang akan diwarisi dari body atau elemen induk */
+}
+
+/* Gaya untuk judul (h1) */
+.home-page h1 {
+  font-size: 2.8rem; /* Ukuran font lebih besar untuk judul utama */
+  margin-bottom: 16px; /* Jarak bawah setelah judul */
+  font-weight: 700; /* Ketebalan font */
+  color: var(--color-text-primary); /* Warna teks utama dari variabel */
+  animation: fadeInUp 0.7s ease-out; /* Animasi muncul dari bawah */
+  letter-spacing: -0.02em; /* Sedikit penyesuaian jarak antar huruf */
+}
+
+/* Gaya untuk paragraf penjelasan (p) */
+.home-page p {
+  margin-top: 0; /* Hapus margin atas default */
+  margin-bottom: 32px; /* Jarak bawah yang lebih besar setelah paragraf */
+  color: var(--color-text-secondary); /* Warna teks sekunder dari variabel */
+  max-width: 450px; /* Lebar maksimum paragraf */
+  line-height: 1.6; /* Jarak antar baris untuk keterbacaan */
+  animation: fadeInUp 0.9s ease-out; /* Animasi muncul dari bawah */
+}
+
+/* Gaya untuk tombol Login */
+.home-page .login-button {
+  display: inline-flex; /* Menggunakan flexbox untuk menata ikon dan teks di dalam tombol */
+  align-items: center; /* Pusatkan item (ikon/teks) secara vertikal */
+  justify-content: center; /* Pusatkan item (ikon/teks) secara horizontal */
+  background-color: var(
+    --color-primary
+  ); /* Warna latar belakang dari variabel primary */
+  color: var(--color-text-on-primary); /* Warna teks di atas warna primary */
+  padding: 14px 28px; /* Padding di dalam tombol */
+  border: none; /* Hapus border default */
+  border-radius: var(
+    --border-radius
+  ); /* ✨ KEMBALI MENGGUNAKAN VARIABEL RADIUS YANG LEBIH KECIL ✨ */
+  font-size: 1.1rem; /* Ukuran font tombol */
+  font-weight: 600; /* Ketebalan font tombol */
+  cursor: pointer; /* Ubah kursor menjadi pointer saat diarahkan */
+  transition: all 0.3s ease; /* Transisi halus untuk semua properti yang berubah */
+  animation: fadeInUp 1.1s ease-out; /* Animasi muncul dari bawah */
+  box-shadow: var(--shadow-elevation-2); /* Bayangan sedang dari variabel */
+  gap: 10px; /* Jarak antara ikon dan teks */
+}
+
+/* Efek saat tombol di-hover (disorot mouse) */
+.home-page .login-button:hover {
+  background-color: var(
+    --color-primary-dark
+  ); /* Warna latar belakang lebih gelap saat hover */
+  transform: translateY(-3px); /* Tombol naik sedikit saat di-hover */
+  box-shadow: var(--shadow-elevation-3); /* Bayangan lebih kuat saat di-hover */
+}
+
+/* Efek saat tombol di-klik (aktif) */
+.home-page .login-button:active {
+  transform: translateY(0); /* Kembali ke posisi semula saat diklik */
+  box-shadow: var(--shadow-elevation-1); /* Kembali ke bayangan awal */
+}
+
+/* Gaya saat tombol dalam keadaan disabled */
+.home-page .login-button:disabled {
+  background-color: var(--color-disabled); /* Warna latar belakang disabled */
+  color: var(--color-disabled-text); /* Warna teks disabled */
+  cursor: not-allowed; /* Kursor menunjukkan tidak bisa diklik */
+  transform: none; /* Hapus efek transform */
+  box-shadow: none; /* Hapus bayangan */
+  opacity: 0.7; /* Sedikit transparan */
+}
+
+/* Gaya untuk ikon Google di dalam tombol */
+.home-page .login-button img.google-icon {
+  /* Lebih spesifik untuk tag img */
+  width: 22px; /* Ukuran ikon sedikit lebih besar */
+  height: 22px; /* Ukuran ikon */
+  object-fit: contain; /* Pastikan ikon tidak terdistorsi */
+}
+
+/* Gaya untuk spinner kecil di tombol saat loading */
+.home-page .login-button .loading-spinner-small {
+  border: 3px solid var(--color-loading-spinner-border); /* Warna border spinner dari variabel */
+  border-top: 3px solid var(--color-loading-spinner-top); /* Warna bagian yang berputar dari variabel */
+  border-radius: 50%; /* Bentuk lingkaran */
+  width: 16px; /* Ukuran spinner sedikit lebih besar */
+  height: 16px; /* Ukuran spinner */
+  animation: spin 1s linear infinite; /* Animasi berputar */
+  display: inline-block; /* Pastikan spinner inline */
+  flex-shrink: 0; /* Mencegah spinner menyusut */
+}
+
+/* Keyframes untuk animasi spinner berputar */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Keyframes untuk animasi muncul dari bawah */
+@keyframes fadeInUp {
+  from {
+    opacity: 0; /* Mulai dari tidak terlihat */
+    transform: translateY(20px); /* Mulai dari posisi 20px di bawah */
+  }
+  to {
+    opacity: 1; /* Akhiri di posisi terlihat penuh */
+    transform: translateY(0); /* Akhiri di posisi awal */
+  }
+}
+
+/* Media query untuk layar yang lebih kecil */
+@media (max-width: 600px) {
+  .home-page h1 {
+    font-size: 2rem; /* Ukuran judul lebih kecil di layar kecil */
+  }
+
+  .home-page p {
+    font-size: 0.95rem; /* Ukuran paragraf sedikit lebih kecil */
+    margin-bottom: 24px;
+  }
+
+  .home-page .login-button {
+    padding: 12px 20px; /* Padding tombol lebih kecil */
+    font-size: 1rem; /* Ukuran font tombol lebih kecil */
+  }
+
+  .home-page .login-button img.google-icon {
+    width: 20px; /* Ukuran ikon lebih kecil */
+    height: 20px;
+  }
+
+  .home-page .login-button .loading-spinner-small {
+    width: 14px; /* Ukuran spinner lebih kecil */
+    height: 14px;
+  }
+}

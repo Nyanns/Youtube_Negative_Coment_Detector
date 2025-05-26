@@ -1,0 +1,233 @@
+/* src/index.css */
+
+/* Impor file warna dari folder styles */
+@import url("./styles/colors.css");
+
+/* Definisikan variabel CSS global lainnya di selector :root */
+:root {
+  /* Spasi */
+  --spacing-unit: 8px; /* Unit dasar spasi */
+
+  /* Border Radius */
+  --border-radius: 8px; /* Radius sudut standar */
+  --border-radius-small: 4px; /* Radius sudut lebih kecil */
+
+  /* Bayangan */
+  --shadow-elevation-1: 0 1px 2px rgba(60, 64, 67, 0.3),
+    0 1px 3px 1px rgba(60, 64, 67, 0.15); /* Bayangan level 1 */
+
+  /* Tipografi Dasar */
+  --font-family-primary: "Inter", sans-serif; /* Menggunakan font Inter */
+
+  /* Warna spesifik untuk skeleton loading */
+  --skeleton-color-light: #e0e0e0; /* Warna abu-abu terang untuk skeleton */
+
+  /* Tambahkan variabel warna jika belum ada di colors.css, contoh: */
+  /* --color-danger: #dc3545; */
+}
+
+/* Layout Dasar Full Screen */
+/* Pastikan html dan body mengambil tinggi penuh dari viewport */
+html,
+body {
+  height: 100%;
+  margin: 0; /* Hapus margin default browser */
+  padding: 0; /* Hapus padding default browser */
+}
+
+/* Gaya dasar untuk body */
+body {
+  min-height: 100vh; /* Pastikan tinggi minimal 100% viewport height */
+  background-color: var(--color-background); /* Gunakan variabel warna latar */
+  color: var(--color-text-primary); /* Gunakan variabel warna teks primer */
+  font-family: var(--font-family-primary); /* Gunakan variabel font */
+  line-height: 1.5; /* Tinggi baris standar */
+}
+
+/* Pastikan elemen root aplikasi React (#root) mengambil seluruh ruang yang tersedia */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex; /* Tambahkan ini agar #root bisa menjadi flex container jika diperlukan */
+  flex-direction: column; /* Menyusun konten di dalam #root secara vertikal */
+}
+
+/* Reset box-sizing */
+/* Disarankan agar padding dan border tidak menambah ukuran elemen */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Gaya Dasar Elemen */
+
+/* Gaya dasar untuk link */
+a {
+  font-weight: 500;
+  color: var(--color-primary); /* Gunakan variabel warna primer untuk link */
+  text-decoration: none; /* Hapus underline default */
+  transition: color 0.25s ease;
+}
+
+a:hover {
+  color: var(
+    --color-primary-dark
+  ); /* Gunakan variabel warna primer gelap saat hover */
+  text-decoration: underline; /* Tambahkan underline saat hover (opsional) */
+}
+
+/* Gaya dasar untuk button */
+button {
+  padding: calc(var(--spacing-unit) * 0.75) calc(var(--spacing-unit) * 1.5); /* Padding menggunakan variabel spasi */
+  border: none; /* Hapus border default */
+  border-radius: var(
+    --border-radius-small
+  ); /* Gunakan variabel border radius */
+  font-weight: 500; /* Jaga ketebalan font */
+  font-size: 1em; /* Jaga ukuran font */
+  font-family: inherit; /* Gunakan font keluarga dari induk */
+  cursor: pointer;
+
+  background-color: var(--color-primary); /* Gunakan variabel warna primer */
+  color: var(
+    --color-text-on-primary
+  ); /* Gunakan variabel warna teks di atas primer */
+
+  transition: background-color 0.25s ease, box-shadow 0.25s ease; /* Transisi untuk hover */
+}
+
+button:hover {
+  background-color: var(
+    --color-primary-dark
+  ); /* Gunakan variabel warna primer gelap */
+  box-shadow: var(
+    --shadow-elevation-1
+  ); /* Tambahkan bayangan saat hover (opsional) */
+}
+
+button:disabled {
+  background-color: var(--color-border); /* Gunakan variabel warna border */
+  color: var(--color-text-secondary); /* Gunakan variabel warna teks sekunder */
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Gaya untuk Loading Spinner */
+.loading-spinner {
+  display: inline-block; /* Agar bisa diatur ukurannya dan di-center dalam flex/grid */
+  width: 40px; /* Ukuran spinner */
+  height: 40px; /* Ukuran spinner */
+  border: 4px solid var(--color-border); /* Border abu-abu untuk bagian yang tidak bergerak */
+  border-top-color: var(
+    --color-primary
+  ); /* Border warna primer untuk bagian yang berputar */
+  border-radius: 50%; /* Membuat bentuk lingkaran */
+  animation: spin 1s linear infinite; /* Terapkan animasi putar, durasi 1 detik, linear (kecepatan konstan), berulang terus */
+  /* margin-bottom: 15px; Dipindahkan dari inline style App.jsx */
+}
+
+/* Definisikan keyframes untuk animasi putar */
+@keyframes spin {
+  from {
+    transform: rotate(0deg); /* Mulai dari 0 derajat */
+  }
+  to {
+    transform: rotate(
+      360deg
+    ); /* Berakhir di 360 derajat (satu putaran penuh) */
+  }
+}
+
+/* Gaya untuk Pola Background (Garis Diagonal pada Body) */
+body::before {
+  content: ""; /* Wajib untuk pseudo-element */
+  position: fixed; /* Menutupi seluruh viewport dan tetap di tempat saat scroll */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Pastikan pola berada di belakang konten */
+  pointer-events: none; /* Penting: Agar pola tidak mengganggu interaksi mouse */
+
+  /* Buat pola garis diagonal berulang menggunakan repeating-linear-gradient */
+  background-image: repeating-linear-gradient(
+    -45deg,
+    /* Sudut garis (diagonal) */ rgba(var(--color-text-primary-rgb), 0.04) 0px,
+    /* Warna garis transparan (abu tua dengan opacity 4%), mulai di 0px */
+      rgba(var(--color-text-primary-rgb), 0.04) 1px,
+    /* Tebal garis 1px */ transparent 1px,
+    /* Mulai area transparan (jarak antar garis) setelah 1px */ transparent 30px
+      /* Akhir area transparan, jarak 30px antar awal garis berikutnya */
+  );
+  background-attachment: fixed; /* Pastikan pola tetap di tempat saat konten di-scroll */
+}
+
+/* Gaya & Animasi untuk Skeleton Loading */
+.skeleton {
+  /* Warna skeleton akan diatur di komponen CSS spesifik (misal: dashboard.css) */
+  background-color: var(--skeleton-color-light); /* Default light mode */
+  /* Animasi pulse */
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* === Gaya untuk Layar Pemuatan dan Error Aplikasi === */
+.app-loading-screen,
+.app-error-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Memastikan mengisi seluruh tinggi viewport */
+  width: 100%; /* Memastikan mengisi seluruh lebar */
+  padding: 20px; /* Beri sedikit padding agar konten tidak menempel di tepi */
+  text-align: center; /* Untuk memusatkan teks di dalam elemen <p> */
+  /* background-color: var(--color-background); Sudah di-set di body */
+  /* color: var(--color-text-primary); Sudah di-set di body */
+}
+
+/* Margin bawah untuk spinner saat di dalam .app-loading-screen */
+.app-loading-screen .loading-spinner {
+  margin-bottom: 15px;
+}
+
+.error-message {
+  color: var(
+    --color-danger,
+    #d9534f
+  ); /* Fallback jika --color-danger tidak ada */
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.error-message.large-error {
+  /* Digunakan di App.jsx untuk pesan error video */
+  font-size: 1.2em;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.error-detail {
+  color: var(--color-text-secondary);
+  font-size: 0.9em;
+  margin-bottom: 20px;
+}
+
+/* Tombol spesifik untuk layar error jika perlu styling berbeda */
+.button.error-logout-button {
+  margin-top: 20px;
+  /* Anda bisa menambahkan gaya spesifik di sini jika tombol logout di halaman error
+     perlu tampilan yang berbeda dari tombol standar */
+}

@@ -1,0 +1,451 @@
+/* src/css/dashboard.css */
+
+/* Gaya untuk kontainer utama halaman Dashboard */
+.dashboard-page {
+  max-width: 100%; /* Ambil lebar penuh */
+  margin: 0; /* Hapus margin */
+
+  display: flex; /* Gunakan Flexbox untuk tata letak sidebar dan konten utama */
+  flex-direction: row; /* Susun elemen secara horizontal (sidebar kiri, konten kanan) */
+  min-height: 100vh; /* Pastikan halaman mengambil tinggi viewport penuh */
+  /* Tambahkan padding kiri seukuran lebar sidebar agar konten utama tidak tertutup */
+  padding-left: 180px;
+  /* Tambahkan padding kanan jika perlu ruang di sisi kanan pada layar lebar */
+  padding-right: var(--spacing-unit); /* Padding di sisi kanan halaman */
+
+  /* Hapus gaya kotak dari sini */
+  background-color: transparent; /* Latar belakang transparan, gunakan background body */
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  overflow: visible; /* Konten bisa scroll di dalam main content */
+
+  padding-top: 0; /* Pastikan padding atas 0 */
+  padding-bottom: 0; /* Pastikan padding bawah 0 */
+}
+
+/* Gaya untuk Sidebar Kiri (Sticky/Fixed, Penuh Tinggi, dengan Garis Kanan) */
+.dashboard-sidebar {
+  /* Jadikan sidebar fixed agar sticky */
+  position: fixed;
+  top: 0; /* Tempelkan ke bagian atas viewport */
+  bottom: 0; /* Rentangkan hingga bagian bawah viewport */
+  left: 0; /* Tempelkan ke bagian kiri viewport */
+  width: 175px; /* Lebar sidebar tetap */
+  flex-shrink: 0; /* Jangan biarkan sidebar mengecil */
+  z-index: 10; /* Pastikan sidebar di atas konten lain saat scroll */
+
+  /* Background Sidebar: Pola Titik Halus (Opsi 2) */
+  background-image: radial-gradient(
+    circle,
+    rgba(var(--color-text-primary-rgb), 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 16px 16px;
+  background-color: var(
+    --color-surface
+  ); /* Pastikan background dasar tetap ada di bawah pola */
+
+  border: none; /* Tanpa border */
+  border-radius: 0; /* Tanpa radius */
+
+  /* Tambahkan border kanan sebagai garis pemisah vertikal */
+  border-right: 1px solid var(--color-border);
+
+  /* Sesuaikan padding di dalam sidebar (atas lebih besar) */
+  /* padding: top right bottom left; */
+  padding: calc(var(--spacing-unit) * 4.5) calc(var(--spacing-unit) * 2)
+    calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 2);
+
+  display: flex; /* Gunakan Flexbox untuk menata elemen di dalam sidebar */
+  flex-direction: column; /* Susun elemen di dalam sidebar secara vertikal */
+  /* Tata elemen di dalam sidebar: profil di atas, tombol logout di bawah */
+  justify-content: space-between;
+  align-items: center; /* Pusatkan elemen di dalam sidebar secara horizontal */
+  text-align: center; /* Pusatkan teks di dalam sidebar */
+
+  /* Tambahkan scroll jika konten sidebar lebih panjang dari tinggi viewport */
+  overflow-y: auto;
+  /* Hapus height: 100% karena fixed top/bottom sudah menentukannya */
+  /* height: 100%; */
+}
+
+/* Gaya untuk bagian profil di sidebar */
+.sidebar-profile-section {
+  display: flex;
+  flex-direction: column; /* Susun gambar dan nama secara vertikal */
+  align-items: center; /* Pusatkan gambar dan nama secara horizontal */
+  margin-bottom: calc(
+    var(--spacing-unit) * 2
+  ); /* Ruang di bawah bagian profil */
+  width: 100%; /* Ambil lebar penuh sidebar */
+}
+
+/* Gaya untuk gambar profil di sidebar */
+.profile-image-sidebar {
+  width: 80px; /* Ukuran gambar profil di sidebar */
+  height: 80px; /* Ukuran gambar profil di sidebar */
+  border-radius: 20%; /* Bentuk lingkaran */
+  margin-bottom: var(--spacing-unit); /* Ruang di bawah gambar */
+  object-fit: cover;
+  border: 2px solid var(--color-border);
+}
+
+/* Gaya untuk ikon profil default di sidebar */
+.profile-icon-sidebar {
+  width: 80px; /* Ukuran ikon profil di sidebar */
+  height: 80px;
+  margin-bottom: var(--spacing-unit); /* Ruang di bawah ikon */
+  color: var(--color-text-secondary);
+}
+
+/* Gaya untuk nama profil di sidebar */
+.profile-name-sidebar {
+  margin: 0;
+  font-size: 1.1em; /* Ukuran font nama di sidebar */
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  word-break: break-word; /* Biarkan nama panjang pecah baris */
+  width: 100%; /* Ambil lebar penuh */
+  overflow-wrap: break-word; /* Pastikan kata panjang pecah */
+}
+
+/* Gaya untuk tombol logout di sidebar - gaya dasar diwarisi dari index.css */
+.logout-button-sidebar {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Pusatkan ikon dan teks di tombol */
+  width: 100%; /* Tombol ambil lebar penuh sidebar */
+  margin-top: auto; /* Dorong tombol ke bagian bawah sidebar */
+}
+
+/* Gaya untuk Konten Utama Kanan (Scrollable, Rata Kiri) */
+.dashboard-main-content {
+  display: flex; /* Gunakan Flexbox untuk menata elemen di dalam konten utama */
+  flex-direction: column; /* Susun elemen di dalam konten utama secara vertikal */
+  flex-grow: 1; /* Biarkan konten utama mengambil sisa ruang */
+  min-width: 0; /* Penting untuk flex item agar tidak overflow */
+  /* Tambahkan padding di sini (ruang di dalam area konten utama) */
+  padding: calc(var(--spacing-unit) * 1) var(--spacing-unit)
+    calc(var(--spacing-unit) * 2) var(--spacing-unit); /* Padding Top, Right, Bottom, Left */
+  margin: 0; /* Hapus margin */
+  /* Jadikan konten utama scrollable */
+  overflow-y: auto;
+  /* Hapus height: 100% karena konten akan scroll secara alami di dalam body */
+  /* height: 100%; */
+}
+
+/* Gaya untuk judul utama konten Dashboard (Rata Kiri) */
+.dashboard-main-content h1 {
+  font-size: 2.5em; /* Ukuran font judul utama */
+  margin-top: 0; /* Hapus margin atas, padding .dashboard-main-content sudah cukup */
+  /* Kurangi margin bawah judul */
+  margin-bottom: calc(
+    var(--spacing-unit) * 0.5
+  ); /* Kurangi margin bawah judul */ /* Kurangi margin bawah judul */
+  color: var(--color-primary); /* Gunakan warna primer untuk judul utama */
+  text-align: left; /* Rata Kiri */
+}
+
+/* Gaya untuk teks deskriptif (Rata Kiri) */
+.dashboard-description {
+  text-align: left; /* Rata Kiri */
+  color: var(--color-text-secondary);
+  /* Kurangi margin bawah teks deskriptif */
+  margin-top: var(--spacing-unit); /* Tambah sedikit margin atas */
+  margin-bottom: var(--spacing-unit); /* Kurangi margin bawah teks deskriptif */
+  max-width: 100%; /* Hapus batasan lebar */
+  margin-left: 0; /* Hapus auto margin */
+  margin-right: 0; /* Hapus auto margin */
+}
+
+/* Gaya untuk Kontainer Daftar Video (Di dalam Konten Utama, Hanya Garis Atas) */
+/* Ini membungkus pesan "tidak ada video" dan daftar video grid */
+.dashboard-content-box {
+  /* Hapus background, border, radius, shadow dari sini */
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+
+  /* Tambahkan margin atas untuk jarak dari elemen di atasnya (deskripsi) */
+  margin-top: 0; /* Pastikan margin atas 0 */
+
+  flex-grow: 1; /* Biarkan kotak daftar video mengambil sisa ruang di main content */
+  display: flex; /* Gunakan flexbox untuk menata konten di dalamnya */
+  flex-direction: column; /* Susun konten di dalam kotak secara vertikal */
+}
+
+/* Gaya untuk garis pemisah di atas daftar video */
+/* Buat elemen terpisah untuk garis agar lebih mudah dikontrol */
+.video-list-separator {
+  height: 1px;
+  background-color: var(--color-border);
+  /* Kurangi margin bawah garis */
+  margin-bottom: calc(var(--spacing-unit) * 2); /* Kurangi margin bawah garis */
+}
+
+/* Gaya untuk pesan "Tidak ada video" */
+/* Ini sekarang di dalam .dashboard-content-box */
+.no-videos-message {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  margin-bottom: 0; /* Pastikan tidak ada margin bawah jika ini elemen terakhir di kotak */
+  margin-top: auto; /* Dorong pesan ke tengah vertikal jika kotak kosong */
+  margin-bottom: auto; /* Dorong pesan ke tengah vertikal jika kotak kosong */
+}
+
+/* Gaya untuk kontainer daftar video */
+/* Ini sekarang di dalam .dashboard-content-box */
+.video-list-container {
+  padding: 0; /* Hapus padding container */
+  margin-top: 0; /* Pastikan margin atas 0 */
+  flex-grow: 1; /* Biarkan daftar video mengambil sisa ruang di kotak */
+}
+
+/* Gaya untuk daftar video (ul) menjadi Grid Container */
+.video-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(250px, 1fr)
+  ); /* Kolom Otomatis Responsif */
+  gap: calc(var(--spacing-unit) * 2); /* Jarak antar item Grid (misal: 16px) */
+}
+
+/* Gaya untuk setiap item LI (Grid Item) */
+.video-item {
+  margin-bottom: 0;
+  padding: 0;
+  border-bottom: none;
+  width: 100%;
+}
+
+/* Gaya untuk Card Video itu sendiri (Di dalam LI) */
+.video-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface); /* Background card */
+  border: 1px solid var(--color-border); /* Border card */
+  border-radius: var(--border-radius); /* Radius sudut card */
+  padding: var(--spacing-unit); /* Padding di dalam card */
+  box-shadow: var(--shadow-elevation-1); /* Bayangan card */
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+  cursor: pointer;
+  height: 100%;
+  justify-content: space-between;
+  overflow: hidden; /* Penting agar radius sudut thumbnail */
+}
+
+/* Efek saat card dihover atau focus (untuk aksesibilitas) */
+.video-card:hover,
+.video-card:focus {
+  box-shadow: 0 2px 4px rgba(60, 64, 67, 0.3),
+    0 2px 6px 2px rgba(60, 64, 67, 0.15); /* Tingkatkan bayangan */
+  outline: none;
+}
+
+/* Gaya untuk kontainer info video (thumbnail + detail) di dalam card */
+.video-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-right: 0;
+  margin-bottom: var(
+    --spacing-unit
+  ); /* Tambah margin bawah untuk pemisah antara info dan tombol */
+  min-width: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Gaya untuk thumbnail video di dalam card */
+.video-thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius-small); /* Radius sudut thumbnail */
+  margin-right: 0;
+  margin-bottom: var(
+    --spacing-unit
+  ); /* Tambah margin bawah thumbnail agar terpisah dari judul */
+  object-fit: cover;
+  flex-shrink: 0;
+  max-height: 180px; /* Batasi tinggi max thumbnail */
+  display: block; /* Penting untuk menghilangkan ruang di bawah gambar */
+}
+
+/* Gaya untuk detail video (judul, dll) di dalam card */
+.video-details {
+  flex-grow: 1;
+  min-width: 0;
+  width: 100%;
+}
+
+/* Gaya untuk judul video di dalam card */
+.video-title {
+  margin: 0;
+  font-size: 1.1em;
+  color: var(--color-text-primary); /* Warna teks primer */
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Gaya untuk tombol pilih video di dalam card - gaya dasar diwarisi dari index.css */
+.select-video-button {
+  flex-shrink: 0;
+  margin-top: var(
+    --spacing-unit
+  ); /* Tambah margin atas untuk pemisah dari info video */
+  width: 100%;
+  padding: var(--spacing-unit) calc(var(--spacing-unit) * 1.5);
+  font-size: 0.9em;
+  text-align: center;
+}
+
+/* Gaya untuk Skeleton Loading */
+.video-card.skeleton {
+  /* Warna background skeleton diatur di index.css menggunakan variabel --skeleton-color */
+  border-color: transparent; /* Hapus border */
+  box-shadow: none; /* Hapus bayangan */
+  cursor: default; /* Ubah cursor */
+  /* Hapus efek hover/focus pada skeleton */
+  pointer-events: none; /* Jangan biarkan di-klik */
+}
+
+.video-card.skeleton .skeleton-thumbnail {
+  width: 100%;
+  height: 90px; /* Ukuran placeholder thumbnail */
+  background-color: var(--skeleton-color-light); /* Warna default */
+  border-radius: var(--border-radius-small);
+  margin-bottom: var(--spacing-unit);
+  /* Animasi pulse diatur di index.css pada class .skeleton */
+}
+
+/* Gaya untuk skeleton placeholder tombol */
+.video-card.skeleton .skeleton-details {
+  width: 100%;
+  display: flex; /* Gunakan flex untuk menata judul dan tombol placeholder */
+  flex-direction: column;
+}
+
+/* Gaya untuk skeleton placeholder judul */
+.video-card.skeleton .skeleton-title {
+  width: 80%; /* Lebar placeholder judul */
+  height: 1em; /* Tinggi placeholder judul */
+  background-color: var(--skeleton-color-light); /* Warna default */
+  margin-bottom: var(--spacing-unit);
+  border-radius: var(--border-radius-small);
+  /* Animasi pulse diatur di index.css pada class .skeleton */
+}
+
+/* Gaya untuk skeleton placeholder tombol */
+.video-card.skeleton .skeleton-button-placeholder {
+  width: 100%; /* Lebar placeholder tombol */
+  height: calc(
+    var(--spacing-unit) * 0.75 * 2 + 1em
+  ); /* Tinggi placeholder tombol (sesuai padding + font-size button) */
+  background-color: var(--skeleton-color-light); /* Warna default */
+  margin-top: var(--spacing-unit); /* Tambah margin atas */
+  border-radius: var(--border-radius-small);
+  /* Animasi pulse diatur di index.css pada class .skeleton */
+}
+
+/* Media Query untuk Responsif Sidebar */
+@media (max-width: 768px) {
+  .dashboard-page {
+    flex-direction: column; /* Tata elemen dalam kolom di layar kecil */
+    padding-left: 0; /* Hapus padding kiri */
+    padding-right: 0; /* Hapus padding kanan */
+    padding-top: var(--spacing-unit); /* Tambah padding atas/bawah */
+    padding-bottom: var(--spacing-unit);
+    margin: 0; /* Hapus margin auto */
+    min-height: 100vh; /* Jaga min-height */
+    border: none; /* Hapus border kotak utama */
+    box-shadow: none; /* Hapus bayangan kotak utama */
+    overflow: visible; /* Hapus overflow hidden */
+  }
+
+  .dashboard-sidebar {
+    position: static; /* Sidebar tidak fixed di layar kecil */
+    width: 100%; /* Sidebar ambil lebar penuh */
+    flex-direction: row; /* Tata elemen di sidebar secara horizontal */
+    justify-content: space-between; /* Profil di kiri, logout di kanan */
+    align-items: center; /* Pusatkan vertikal */
+    padding: var(--spacing-unit); /* Padding standar */
+    border-right: none; /* Hapus border kanan */
+    border-bottom: 1px solid var(--color-border); /* Tambah border bawah */
+    box-shadow: none; /* Hapus bayangan */
+    overflow-y: visible; /* Hapus scrollbar jika ada */
+    top: auto; /* Hapus top */
+    bottom: auto; /* Hapus bottom */
+    left: auto; /* Hapus left */
+  }
+
+  .sidebar-profile-section {
+    flex-direction: row; /* Tata gambar dan nama profil secara horizontal */
+    align-items: center; /* Pusatkan vertikal */
+    margin-bottom: 0; /* Hapus margin bawah */
+    flex-grow: 1; /* Biarkan profil mengambil ruang */
+    text-align: left; /* Ratakan teks profil ke kiri */
+  }
+
+  .profile-image-sidebar,
+  .profile-icon-sidebar {
+    width: 40px; /* Ukuran gambar/ikon kembali normal */
+    height: 40px;
+    margin-bottom: 0; /* Hapus margin bawah */
+    margin-right: var(--spacing-unit); /* Tambah margin kanan */
+  }
+
+  .profile-name-sidebar {
+    font-size: 1.2em; /* Ukuran font nama kembali normal */
+    text-align: left; /* Pastikan teks nama rata kiri */
+    white-space: nowrap; /* Jaga agar nama tidak pecah baris jika pendek */
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .logout-button-sidebar {
+    width: auto; /* Tombol logout kembali ke lebar otomatis */
+    margin-top: 0; /* Hapus margin atas */
+  }
+
+  .dashboard-main-content {
+    padding: var(--spacing-unit); /* Padding standar di layar kecil */
+  }
+
+  .dashboard-content h1 {
+    margin-top: 0; /* Hapus margin atas judul di layar kecil */
+    margin-bottom: var(--spacing-unit); /* Sesuaikan margin bawah */
+  }
+
+  .dashboard-description {
+    margin-bottom: var(
+      --spacing-unit
+    ); /* Kurangi margin bawah teks deskriptif */
+  }
+
+  .dashboard-content-box {
+    /* Hapus padding dari sini di layar kecil */
+    padding: 0;
+    margin-top: var(
+      --spacing-unit
+    ); /* Tambah margin atas untuk jarak dari deskripsi */
+  }
+
+  .video-list-separator {
+    margin-bottom: var(--spacing-unit); /* Kurangi margin bawah garis */
+  }
+
+  .video-list {
+    gap: var(
+      --spacing-unit
+    ); /* Kurangi jarak antar card video di layar kecil */
+  }
+}
