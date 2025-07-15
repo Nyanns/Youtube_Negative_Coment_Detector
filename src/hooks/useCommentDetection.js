@@ -30,8 +30,10 @@ const getCacheKey = (comment) => `${comment.id}-${comment.text}`; // Fungsi untu
 // =================== FUNGSI DETEKSI LOKAL (DENGAN LOGGING) =========================
 // ===================================================================================
 const detectJudolSpam = async (commentText) => {
+    // isDevMode akan bernilai true saat Anda menjalankan 'npm run dev'
     const isDevMode = import.meta.env.DEV;
 
+    // Bagian ini HANYA akan berjalan jika isDevMode adalah true.
     if (isDevMode) {
         console.log(`\n\n====================================================`);
         console.log(`[DIAGNOSA] Memulai deteksi untuk komentar: "${commentText}"`);
@@ -84,6 +86,8 @@ const detectJudolSpam = async (commentText) => {
 
 // --- FUNGSI BANTUAN UNTUK LOGIKA PENANDAAN ---
 const determineFlagStatus = (isJudolSpam, perspectiveScores) => {
+    // 1. Ambil semua skor dari objek perspectiveScores dengan aman.
+    // Jika perspectiveScores tidak ada, anggap semua skor 0 atau tidak ada.
     const {
         toxicityScore,
         severeToxicityScore,
