@@ -65,28 +65,25 @@ export default function SuccessPage({
           >
             ✅
           </span>
-          // Atau menggunakan library ikon: <CheckCircle size={48} className="status-icon success" />
         )}
       </div>
-              {/* Judul Halaman Sukses */}       {" "}
+      {/* Judul Halaman Sukses */}{" "}
       <h2>
-                  {mainTitleText} {/* Menggunakan teks judul yang dinamis */}   
-           {" "}
+        {mainTitleText} {/* Menggunakan teks judul yang dinamis */}{" "}
       </h2>
-              {/* Pesan Utama */}       {" "}
+      {/* Pesan Utama */}{" "}
       <p>
-                  {mainMessageText} {/* Menggunakan teks pesan yang dinamis */} 
-             {" "}
+        {mainMessageText} {/* Menggunakan teks pesan yang dinamis */}{" "}
       </p>
-              {/* Tampilkan pesan error jika ada kegagalan parsial */}       {" "}
+      {/* Tampilkan pesan error jika ada kegagalan parsial */}{" "}
       {hasError && (
         <p className="error-message">
           {" "}
-          {/* Menggunakan kelas CSS untuk pesan error */}            Detail:{" "}
-          {deleteError} {/* Tampilkan detail error */}         {" "}
+          {/* Menggunakan kelas CSS untuk pesan error */} Detail: {deleteError}{" "}
+          {/* Tampilkan detail error */}{" "}
         </p>
       )}
-              {/* Tombol Kembali ke Dashboard */}       {" "}
+      {/* Tombol Kembali ke Dashboard */}{" "}
       <button
         onClick={onBackToDashboard}
         aria-label="Kembali ke Dashboard" // Tambahkan aria-label untuk aksesibilitas // Gaya tombol sekarang dikelola oleh CSS class di successpage.css
@@ -95,9 +92,8 @@ export default function SuccessPage({
         <span role="img" aria-label="Left arrow">
           🡐
         </span>
-                    Kembali ke Dashboard        {" "}
-      </button>
-         {" "}
+        Kembali ke Dashboard{" "}
+      </button>{" "}
     </div> // Akhir success-page-container
   );
 }

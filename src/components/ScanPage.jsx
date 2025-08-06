@@ -81,6 +81,35 @@ function ScanPage({
     };
   }, [detectedComments]);
 
+  // Kalkulasi Persentase
+  const {
+    judolPercentage,
+    toxicPercentage,
+    flaggedOnlyPercentage,
+    cleanPercentage,
+  } = useMemo(() => {
+    if (allCommentsCount === 0) {
+      return {
+        judolPercentage: 0,
+        toxicPercentage: 0,
+        flaggedOnlyPercentage: 0,
+        cleanPercentage: 0,
+      };
+    }
+    return {
+      judolPercentage: (judolSpamCount / allCommentsCount) * 100,
+      toxicPercentage: (toxicCount / allCommentsCount) * 100,
+      flaggedOnlyPercentage: (flaggedOnlyCount / allCommentsCount) * 100,
+      cleanPercentage: (cleanCount / allCommentsCount) * 100,
+    };
+  }, [
+    judolSpamCount,
+    toxicCount,
+    flaggedOnlyCount,
+    cleanCount,
+    allCommentsCount,
+  ]);
+
   const [checkedComments, setCheckedComments] = useState([]);
 
   const handleToggleCheck = useCallback((commentId) => {
@@ -126,7 +155,7 @@ function ScanPage({
   const handleFilterClean = useCallback(() => setDisplayMode("clean"), []);
   const handleFilterAll = useCallback(() => setDisplayMode("none"), []);
 
-  // Tampilan loading dan error (tidak ada perubahan di sini)
+  // Tampilan loading dan error
   if (commentsLoading) {
     return (
       <div className="scan-page-loading">
@@ -157,6 +186,31 @@ function ScanPage({
 
   return (
     <div className="scan-page">
+      {/* Inline style untuk elemen baru */}
+      <style>{`
+        .scan-summary {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 24px;
+          margin-top: 20px;
+          padding: 12px;
+          background-color: #f8f9fa;
+          border-radius: 8px;
+          border: 1px solid #e9ecef;
+        }
+        .summary-item {
+          font-size: 0.9rem;
+          color: #495057;
+        }
+        .summary-item strong {
+          color: #212529;
+          font-weight: 600;
+        }
+      `}</style>
+
       <button onClick={onBackToDashboard} className="back-button">
         Kembali ke Dashboard
       </button>
@@ -192,12 +246,10 @@ function ScanPage({
           >
             Toxic ({toxicCount})
           </button>
-          {/* ## PERUBAHAN DI SINI ## */}
           <button
             onClick={handleFilterFlaggedOnly}
             disabled={isDeleting}
             className={`detection-button ${
-              // Diubah dari 'outline-button'
               displayMode === "flagged_only" ? "active" : ""
             }`}
           >
@@ -279,7 +331,7 @@ function ScanPage({
         )}
       </div>
 
-      {filteredComments.length > 0 && (
+      {detectedComments.length > 0 && (
         <div className="bottom-controls">
           <button
             onClick={handleToggleCheckAllVisible}
@@ -307,6 +359,21 @@ function ScanPage({
               {deleteError.message || String(deleteError)}
             </div>
           )}
+          {/* Menampilkan ringkasan persentase */}
+          <div className="scan-summary">
+            <span className="summary-item">
+              Spam: <strong>{judolPercentage.toFixed(1)}%</strong>
+            </span>
+            <span className="summary-item">
+              Toxic: <strong>{toxicPercentage.toFixed(1)}%</strong>
+            </span>
+            <span className="summary-item">
+              Ditandai: <strong>{flaggedOnlyPercentage.toFixed(1)}%</strong>
+            </span>
+            <span className="summary-item">
+              Bersih: <strong>{cleanPercentage.toFixed(1)}%</strong>
+            </span>
+          </div>
         </div>
       )}
     </div>
