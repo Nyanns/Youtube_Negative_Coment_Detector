@@ -13,14 +13,19 @@ const FUZZY_MATCH_THRESHOLD = 85;
 const PARTIAL_MATCH_THRESHOLD = 90; // Dinonaktifkan sementara, tetapi konstanta disimpan
 
 // Thresholds untuk berbagai kategori deteksi komentar.
-const TOXICITY_THRESHOLD = 0.45;
+const TOXICITY_THRESHOLD = 0.15;
 const INSULT_THRESHOLD = 0.40;
 const PROFANITY_THRESHOLD = 0.38;
 const SEVERE_TOXICITY_THRESHOLD = 0.30;
 const THREAT_THRESHOLD = 0.30;
 
-const BATCH_SIZE = 10; // Jumlah komentar yang diproses per batch API
-const BATCH_DELAY = 500; // Jeda antar batch dalam milidetik
+// ## PERBAIKAN DI SINI ##
+// BATCH_SIZE dikurangi menjadi 3 untuk mengirim lebih sedikit permintaan sekaligus.
+const BATCH_SIZE = 5;
+
+// Jeda antar batch diperpanjang menjadi 5000ms (2 detik) untuk
+// memberikan jeda yang lebih aman dan menghindari error "429: Quota Exceeded".
+const BATCH_DELAY = 5000;
 
 // --- CACHE ---
 const analysisCache = new Map(); // Cache untuk hasil analisis

@@ -321,6 +321,8 @@ export const judolSpamCombinedRegex = new RegExp(
     '\\b(?:https?://|www\\.)[\\w\\-]+(?:\\.[\\w\\-]+)+(?:/[^\\s]*)?', // URL standar
     '\\b(?:bit\\.ly|cutt\\.ly|tinyurl\\.com|s\\.id)/[\\w\\-]+', // URL Shortener umum
     '\\bwa\\.me/(?:\\+)?\\d+', // Link WhatsApp
+    // Pola untuk menangkap "garuda hoki" dan "playland88" setelah normalisasi
+    '\\garuda\\s*hoki|playland\\s*88',
 
   ].join("|"),
   "gi" // Flag 'g' untuk global, 'i' untuk case-insensitivity (meskipun normalisasi sudah lowercase)
